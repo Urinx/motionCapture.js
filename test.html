@@ -1,0 +1,52 @@
+<head>
+	<meta charset="utf-8">
+	<title>Camera Test</title>
+	<script type="text/javascript" src="motionCapture.js"></script>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		display: flex;
+	}
+	video,canvas{
+		margin: auto;
+	}
+	#testBox{
+		width: 100px;
+		height: 100px;
+		background: pink;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50px,-50px);
+	}
+	</style>
+</head>
+
+<body>
+	<video></video>
+	<canvas></canvas>
+	<div id="testBox"></div>
+</body>
+
+<script type="text/javascript">
+function $(el){
+	return document.querySelector(el);
+}
+
+window.addEventListener("DOMContentLoaded",function(){
+	var MC = new MotionCapture();
+	MC.catch('down', function(){
+		$('#testBox').style.top = $('#testBox').offsetTop+30+'px';
+	}).catch('up', function(){
+		$('#testBox').style.top = $('#testBox').offsetTop-30+'px';
+	}).catch('left', function(){
+		$('#testBox').style.left = $('#testBox').offsetLeft-30+'px';
+	}).catch('right', function(){
+		$('#testBox').style.left = $('#testBox').offsetLeft+30+'px';
+	})
+	MC.start();
+},false);
+</script>
